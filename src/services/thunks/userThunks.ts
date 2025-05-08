@@ -10,11 +10,14 @@ import {
   TLoginData
 } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { setCookie, deleteCookie } from '../../utils/cookie';
 
 export const registerUser = createAsyncThunk(
   'auth/registerUser',
   async (data: TRegisterData) => {
     const response = await registerUserApi(data);
+    setCookie('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
     return response;
   }
 );
@@ -22,12 +25,16 @@ export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async (data: TLoginData) => {
     const response = await loginUserApi(data);
+    setCookie('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
     return response;
   }
 );
 
 export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
   const response = await logoutApi();
+  deleteCookie('accessToken');
+  localStorage.removeItem('refreshToken');
   return response;
 });
 
