@@ -90,11 +90,29 @@ export const userSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state) => {
         state.userStatus = RequestStatus.Failed;
+      })
+      .addCase(forgotPassword.pending, (state) => {
+        state.userStatus = RequestStatus.Loading;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        state.userStatus = RequestStatus.Succeeded;
+      })
+      .addCase(forgotPassword.rejected, (state) => {
+        state.userStatus = RequestStatus.Failed;
+      })
+
+      .addCase(resetPassword.pending, (state) => {
+        state.userStatus = RequestStatus.Loading;
+      })
+      .addCase(resetPassword.fulfilled, (state, action) => {
+        state.userStatus = RequestStatus.Succeeded;
+      })
+      .addCase(resetPassword.rejected, (state) => {
+        state.userStatus = RequestStatus.Failed;
       });
   }
 });
 
-export default userSlice;
 export const userSelectors = userSlice.selectors;
 
 export const userActions = {
@@ -107,3 +125,4 @@ export const userActions = {
   forgotPassword,
   resetPassword
 };
+export default userSlice;

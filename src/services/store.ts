@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineSlices } from '@reduxjs/toolkit';
 
 import {
   TypedUseSelectorHook,
@@ -8,9 +8,7 @@ import {
 
 import { userSlice } from '@slices';
 
-const rootReducer = () => {
-  user: userSlice.reducer;
-};
+const rootReducer = combineSlices(userSlice);
 
 const store = configureStore({
   reducer: rootReducer,
