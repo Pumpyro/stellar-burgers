@@ -27,7 +27,8 @@
       "@slices": ["src/services/slices"],
       "@selectors": ["src/services/selectors"],
       "@thunks": ["src/services/thunks"],
-      "@store": ["src/services/store.ts"]
+      "@store": ["src/services/store.ts"],
+      "@constants": ["src/utils/constants"]
     }
   },
   "include": ["src"]

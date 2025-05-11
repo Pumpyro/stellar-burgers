@@ -10,59 +10,56 @@ import {
   TLoginData
 } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCookie, deleteCookie } from '../../utils/cookie';
+import { deleteCookie, setCookie } from '../../utils/cookie';
+import { REFRESH_TOKEN, ACCESS_TOKEN, USER_SLICE_NAME } from '@constants';
 
 export const registerUser = createAsyncThunk(
-  'auth/registerUser',
-  async (data: TRegisterData) => {
-    const response = await registerUserApi(data);
-    setCookie('accessToken', response.accessToken);
-    localStorage.setItem('refreshToken', response.refreshToken);
+  `${USER_SLICE_NAME}/registerUser`,
+  async (userData: TRegisterData) => {
+    const response = await registerUserApi(userData);
+    setCookie(ACCESS_TOKEN, response.accessToken);
+    localStorage.setItem(REFRESH_TOKEN, response.refreshToken);
     return response;
   }
 );
+
 export const loginUser = createAsyncThunk(
-  'auth/loginUser',
-  async (data: TLoginData) => {
-    const response = await loginUserApi(data);
-    setCookie('accessToken', response.accessToken);
-    localStorage.setItem('refreshToken', response.refreshToken);
+  `${USER_SLICE_NAME}/loginUser`,
+  async (userData: TLoginData) => {
+    const response = await loginUserApi(userData);
+    setCookie(ACCESS_TOKEN, response.accessToken);
+    localStorage.setItem(REFRESH_TOKEN, response.refreshToken);
     return response;
   }
 );
 
-export const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
-  const response = await logoutApi();
-  deleteCookie('accessToken');
-  localStorage.removeItem('refreshToken');
-  return response;
-});
+export const logoutUser = createAsyncThunk(
+  `${USER_SLICE_NAME}/logoutUser`,
+  async () => {
+    const response = await logoutApi();
+    deleteCookie(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+    return response;
+  }
+);
 
-export const getUser = createAsyncThunk('auth/getUser', async () => {
-  const response = await getUserApi();
-  return response;
-});
+export const getUser = createAsyncThunk(
+  `${USER_SLICE_NAME}/getUser`,
+  async () => await getUserApi()
+);
 
 export const updateUser = createAsyncThunk(
-  'auth/updateUser',
-  async (data: Partial<TRegisterData>) => {
-    const response = await updateUserApi(data);
-    return response;
-  }
+  `${USER_SLICE_NAME}/updateUser`,
+  async (userData: Partial<TRegisterData>) => await updateUserApi(userData)
 );
 
 export const forgotPassword = createAsyncThunk(
-  'auth/forgotPassword',
-  async (data: { email: string }) => {
-    const response = await forgotPasswordApi(data);
-    return response;
-  }
+  `${USER_SLICE_NAME}/forgotPassword`,
+  async (data: { email: string }) => await forgotPasswordApi(data)
 );
 
 export const resetPassword = createAsyncThunk(
-  'auth/resetPassword',
-  async (data: { password: string; token: string }) => {
-    const response = await resetPasswordApi(data);
-    return response;
-  }
+  `${USER_SLICE_NAME}/resetPassword`,
+  async (data: { password: string; token: string }) =>
+    await resetPasswordApi(data)
 );

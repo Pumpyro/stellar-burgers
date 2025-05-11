@@ -1,5 +1,6 @@
-import { TUser, RequestStatus } from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
+import { USER_SLICE_NAME } from '@constants';
+import { RequestStatus, TUser } from '@utils-types';
 import {
   getUser,
   loginUser,
@@ -10,29 +11,29 @@ import {
   resetPassword
 } from '@thunks';
 
-type UserState = {
+export type UserInitialState = {
   user: TUser | null;
   userStatus: RequestStatus;
-  userChecked: boolean;
+  userCheck: boolean;
 };
 
-const initialState: UserState = {
+const initialState: UserInitialState = {
   user: null,
   userStatus: RequestStatus.Idle,
-  userChecked: false
+  userCheck: false
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: USER_SLICE_NAME,
   initialState,
   selectors: {
     selectUser: (state) => state.user,
-    selectUserChecked: (state) => state.userChecked,
-    selectUserStatus: (state) => state.userStatus
+    selectUserCheck: (state) => state.userCheck,
+    selectStatus: (state) => state.userStatus
   },
   reducers: {
     setCheckUser: (state) => {
-      state.userChecked = true;
+      state.userCheck = true;
     }
   },
   extraReducers: (builder) => {
@@ -91,6 +92,7 @@ export const userSlice = createSlice({
       .addCase(updateUser.rejected, (state) => {
         state.userStatus = RequestStatus.Failed;
       })
+
       .addCase(forgotPassword.pending, (state) => {
         state.userStatus = RequestStatus.Loading;
       })
@@ -125,4 +127,5 @@ export const userActions = {
   forgotPassword,
   resetPassword
 };
+
 export default userSlice;

@@ -1,10 +1,9 @@
-import { TOrdersData, RequestStatus } from '@utils-types';
-import { createSlice } from '@reduxjs/toolkit';
 import { getFeed } from '@thunks';
+import { FEED_SLICE_NAME } from '@constants';
+import { createSlice } from '@reduxjs/toolkit';
+import { RequestStatus, TOrdersData } from '@utils-types';
 
-const initialState: TOrdersData & {
-  feedStatus: RequestStatus;
-} = {
+const initialState: TOrdersData & { feedStatus: RequestStatus } = {
   orders: [],
   total: 0,
   totalToday: 0,
@@ -12,7 +11,7 @@ const initialState: TOrdersData & {
 };
 
 export const feedSlice = createSlice({
-  name: 'feed',
+  name: FEED_SLICE_NAME,
   initialState,
   selectors: {
     selectOrders: (state) => state.orders,

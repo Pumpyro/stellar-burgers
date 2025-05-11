@@ -80,7 +80,8 @@ module.exports = {
       '@slices': path.resolve(__dirname, './src/services/slices'),
       '@selectors': path.resolve(__dirname, './src/services/selectors'),
       '@thunks': path.resolve(__dirname, './src/services/thunks'),
-      '@store': path.resolve(__dirname, './src/services/store.ts')
+      '@store': path.resolve(__dirname, './src/services/store.ts'),
+      '@constants': path.resolve(__dirname, './src/utils/constants')
     }
   },
   output: {

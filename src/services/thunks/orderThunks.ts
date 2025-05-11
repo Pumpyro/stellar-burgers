@@ -1,17 +1,18 @@
 import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ORDER_SLICE_NAME } from '@constants';
 
 export const getOrderByNumber = createAsyncThunk(
-  `order/getOrderByNumber`,
+  `${ORDER_SLICE_NAME}/getOrderByNumber`,
   async (number: number) => await getOrderByNumberApi(number)
 );
 
 export const getOrders = createAsyncThunk(
-  `order/getOrders`,
+  `${ORDER_SLICE_NAME}/getOrders`,
   async () => await getOrdersApi()
 );
 
 export const orderBurger = createAsyncThunk(
-  `order/orderBurger`,
+  `${ORDER_SLICE_NAME}/orderBurger`,
   async (data: string[]) => await orderBurgerApi(data)
 );

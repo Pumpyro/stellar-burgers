@@ -1,7 +1,8 @@
 import { getFeedsApi } from '@api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { FEED_SLICE_NAME } from '@constants';
 
 export const getFeed = createAsyncThunk(
-  `feed/getFeed`,
-  async () => await getFeedsApi()
+  `${FEED_SLICE_NAME}/getFeed`,
+  getFeedsApi
 );

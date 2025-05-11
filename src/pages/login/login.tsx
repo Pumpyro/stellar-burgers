@@ -8,11 +8,14 @@ export const Login: FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const status = useSelector(userSelectors.selectUserStatus);
+  const status = useSelector(userSelectors.selectStatus);
+  const [errorText, setErrorText] = useState('');
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    dispatch(userActions.loginUser({ email, password }));
+    dispatch(userActions.loginUser({ email, password }))
+      .unwrap()
+      .catch((error) => setErrorText(error.message));
   };
 
   if (status === 'loading') {
@@ -21,7 +24,7 @@ export const Login: FC = () => {
 
   return (
     <LoginUI
-      errorText=''
+      errorText={errorText}
       email={email}
       setEmail={setEmail}
       password={password}

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { INGREDIENT_SLICE_NAME } from '@constants';
 import { RequestStatus, TIngredient } from '@utils-types';
 import { getIngredients } from '@thunks';
 
@@ -13,7 +14,7 @@ const initialState: IngredientInitialState = {
 };
 
 export const ingredientSlice = createSlice({
-  name: 'ingredient',
+  name: INGREDIENT_SLICE_NAME,
   initialState,
   selectors: {
     selectIngredients: (state) => state.ingredients,
