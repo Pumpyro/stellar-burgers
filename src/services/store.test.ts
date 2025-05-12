@@ -1,4 +1,4 @@
-import store from '@store';
+import { rootReducer } from '@store';
 import {
   userSlice,
   ingredientSlice,
@@ -9,7 +9,7 @@ import {
 
 describe('Test: инициализация rootReducer', () => {
   it('Должны быть инициализированы все срезы в store', () => {
-    const state = store.getState();
+    const state = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
 
     expect(state).toHaveProperty(userSlice.name);
     expect(state).toHaveProperty(ingredientSlice.name);
