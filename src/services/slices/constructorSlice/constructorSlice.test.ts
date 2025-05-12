@@ -7,7 +7,7 @@ const sauce = mockData.find((ing) => ing.name.includes('Space Sauce'))!;
 const meat1 = mockData.find((ing) => ing.name.includes('Магнолии'))!;
 const meat2 = mockData.find((ing) => ing.name.includes('метеорит'))!;
 
-describe('constructorSlice test', () => {
+describe('constructorSlice', () => {
   it('Инициализация состояния', () => {
     expect(constructorSlice.reducer(undefined, { type: '' })).toEqual({
       addedIngredients: [],

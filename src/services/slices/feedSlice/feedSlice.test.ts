@@ -1,10 +1,10 @@
+import mockData from './mockData';
+import { configureStore } from '@reduxjs/toolkit';
 import feedSlice, { feedActions } from './feedSlice';
 import { RequestStatus } from '@utils-types';
-import { configureStore } from '@reduxjs/toolkit';
 import { getFeed } from '@thunks';
-import mockData from './mockData';
 
-describe('feedSlice test', () => {
+describe('feedSlice', () => {
   const mockState = {
     orders: [],
     total: 0,
