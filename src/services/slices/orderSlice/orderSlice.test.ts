@@ -1,20 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import orderSlice from './orderSlice';
+import orderSlice, { initialState as mockState } from './orderSlice';
 import { getOrders, getOrderByNumber, orderBurger } from '@thunks';
 import { RequestStatus } from '@utils-types';
 
 describe('orderSlice test', () => {
-  const initialState = {
-    orders: [],
-    orderByNumber: [],
-    getOrderStatus: RequestStatus.Idle,
-    getOrderByNumberStatus: RequestStatus.Idle,
-    orderStatus: false,
-    total: 0,
-    totalToday: 0,
-    userOrder: null
-  };
-
   describe('Заказ бургера', () => {
     const mockNewOrderResponse = {
       success: true,
@@ -60,14 +49,14 @@ describe('orderSlice test', () => {
 
     it('orderStatus = false (orderBurger.rejected)', () => {
       const action = { type: orderBurger.rejected.type };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.orderStatus).toBe(false);
     });
 
     it('orderStatus = true (orderBurger.pending)', () => {
       const action = { type: orderBurger.pending.type };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.orderStatus).toBe(true);
     });
@@ -77,7 +66,7 @@ describe('orderSlice test', () => {
         type: orderBurger.fulfilled.type,
         payload: mockNewOrderResponse
       };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.orderStatus).toBe(false);
       expect(newState.userOrder).toEqual(mockNewOrderResponse.order);
@@ -104,14 +93,14 @@ describe('orderSlice test', () => {
 
     it('getOrderStatus = Failed (getOrders.rejected)', () => {
       const action = { type: getOrders.rejected.type };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.getOrderStatus).toBe(RequestStatus.Failed);
     });
 
     it('getOrderStatus = loading (getOrders.pending)', () => {
       const action = { type: getOrders.pending.type };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.getOrderStatus).toBe(RequestStatus.Loading);
     });
@@ -128,7 +117,7 @@ describe('orderSlice test', () => {
         type: getOrders.fulfilled.type,
         payload: mockGetOrdersResponse
       };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.getOrderStatus).toBe(RequestStatus.Succeeded);
       expect(newState.orders).toEqual(mockGetOrdersResponse.orders);
@@ -155,14 +144,14 @@ describe('orderSlice test', () => {
 
     it('getOrderByNumberStatus = failed (getOrderByNumber.rejected)', () => {
       const action = { type: getOrderByNumber.rejected.type };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.getOrderByNumberStatus).toBe(RequestStatus.Failed);
     });
 
     it('getOrderByNumberStatus = loading (getOrderByNumber.pending)', () => {
       const action = { type: getOrderByNumber.pending.type };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.getOrderByNumberStatus).toBe(RequestStatus.Loading);
     });
@@ -179,7 +168,7 @@ describe('orderSlice test', () => {
         type: getOrderByNumber.fulfilled.type,
         payload: mockGetOrderByNumberResponse
       };
-      const newState = orderSlice.reducer(initialState, action);
+      const newState = orderSlice.reducer(mockState, action);
 
       expect(newState.getOrderByNumberStatus).toBe(RequestStatus.Succeeded);
       expect(newState.orderByNumber).toEqual(

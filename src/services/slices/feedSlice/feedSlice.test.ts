@@ -1,17 +1,10 @@
 import mockData from './mockData';
 import { configureStore } from '@reduxjs/toolkit';
-import feedSlice, { feedActions } from './feedSlice';
+import feedSlice, { feedActions, initialState as mockState } from './feedSlice';
 import { RequestStatus } from '@utils-types';
 import { getFeed } from '@thunks';
 
 describe('feedSlice', () => {
-  const mockState = {
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    feedStatus: RequestStatus.Idle
-  };
-
   it('Подтягивание всех заказов с api', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({

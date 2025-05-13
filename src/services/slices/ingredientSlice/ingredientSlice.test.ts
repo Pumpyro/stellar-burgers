@@ -1,14 +1,10 @@
 import mockData from './mockData';
 import { configureStore } from '@reduxjs/toolkit';
-import ingredientSlice from './ingredientSlice';
+import ingredientSlice, { initialState as mockState } from './ingredientSlice';
 import { getIngredients } from '@thunks';
 import { RequestStatus } from '@utils-types';
 
 describe('ingredientSlice', () => {
-  const mockState = {
-    ingredientStatus: RequestStatus.Idle,
-    ingredients: []
-  };
   it('Подтягивание всех ингредиентов с api', async () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({

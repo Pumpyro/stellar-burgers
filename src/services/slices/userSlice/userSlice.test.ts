@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { RequestStatus } from '@utils-types';
 import * as api from '@api';
-import userSlice from './userSlice';
+import userSlice, { initialState as mockState } from './userSlice';
 import {
   registerUser,
   loginUser,
@@ -24,12 +24,6 @@ const mockAuthResponse = {
 };
 
 describe('userSlice', () => {
-  const mockState = {
-    user: null,
-    userStatus: RequestStatus.Idle,
-    userCheck: false
-  };
-
   beforeEach(() => {
     localStorage.clear();
     jest.clearAllMocks;

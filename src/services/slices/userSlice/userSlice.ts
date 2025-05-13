@@ -17,7 +17,7 @@ export type UserInitialState = {
   userCheck: boolean;
 };
 
-const initialState: UserInitialState = {
+export const initialState: UserInitialState = {
   user: null,
   userStatus: RequestStatus.Idle,
   userCheck: false

@@ -11,7 +11,7 @@ export type OrderInitialState = TOrdersData & {
   userOrder: TOrder | null;
 };
 
-const initialState: OrderInitialState = {
+export const initialState: OrderInitialState = {
   orders: [],
   orderByNumber: [],
   getOrderStatus: RequestStatus.Idle,

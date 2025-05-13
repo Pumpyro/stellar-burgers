@@ -3,7 +3,7 @@ import { FEED_SLICE_NAME } from '@constants';
 import { createSlice } from '@reduxjs/toolkit';
 import { RequestStatus, TOrdersData } from '@utils-types';
 
-const initialState: TOrdersData & { feedStatus: RequestStatus } = {
+export const initialState: TOrdersData & { feedStatus: RequestStatus } = {
   orders: [],
   total: 0,
   totalToday: 0,

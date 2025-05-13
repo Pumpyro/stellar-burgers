@@ -8,7 +8,7 @@ export type IngredientInitialState = {
   ingredientStatus: RequestStatus;
 };
 
-const initialState: IngredientInitialState = {
+export const initialState: IngredientInitialState = {
   ingredientStatus: RequestStatus.Idle,
   ingredients: []
 };
